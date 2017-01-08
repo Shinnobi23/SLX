@@ -4,12 +4,13 @@ namespace app\Http\Controllers\Admin;
 
 use App\Models\Sale;
 use Charts;
+use Auth;
 
 class AdminController extends \Backpack\Base\app\Http\Controllers\AdminController
 {
     public function __construct()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         if ($user) {
             if ($user->hasRole('Inspector') || $user->hasRole('Inventor')) {
@@ -29,20 +30,20 @@ class AdminController extends \Backpack\Base\app\Http\Controllers\AdminControlle
         $data['title'] = trans('backpack::base.dashboard');
 
         $data['sale'] = [
-      'count' => [
-        'all'   => Sale::getSaleCount('m', 'all'),
-        'paid'  => Sale::getSaleCount('m', 'paid'),
-        'debit' => Sale::getSaleCount('m', 'debit'),
-      ],
-      'totalIncome' => Sale::getTotalIncome('m'),
-    ];
+            'count' => [
+                'all'   => Sale::getSaleCount('m', 'all'),
+                'paid'  => Sale::getSaleCount('m', 'paid'),
+                'debit' => Sale::getSaleCount('m', 'debit'),
+            ],
+            'totalIncome' => Sale::getTotalIncome('m'),
+        ];
 
         $data['chart'] = Charts::database(Sale::all(), 'bar', 'highcharts')
-      ->title('ຍອດຂາຍປະຈໍາເດືອນ')
-      ->elementLabel('ຍອດຂາຍທັງໝົດ')
-      ->dimensions(1000, 500)
-      ->responsive(true)
-      ->groupByDay();
+            ->title('ຍອດຂາຍປະຈໍາເດືອນ')
+            ->elementLabel('ຍອດຂາຍທັງໝົດ')
+            ->dimensions(1000, 500)
+            ->responsive(true)
+            ->groupByDay();
 
         return view('backpack::dashboard', $data);
     }
@@ -50,7 +51,7 @@ class AdminController extends \Backpack\Base\app\Http\Controllers\AdminControlle
   // public function redirect()
   // {
   //   // The '/admin' route is not to be used as a page, because it breaks the menu's active state.
-  //   $user = \Auth::user();
+  //   $user = Auth::user();
 
   //   if ($user->hasRole('Administrator') || $user->hasRole('Manager'))
   //   {
