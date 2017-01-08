@@ -2,8 +2,8 @@
 
 namespace app\Http\Controllers\Admin;
 
-use Charts;
 use App\Models\Sale;
+use Charts;
 
 class AdminController extends \Backpack\Base\app\Http\Controllers\AdminController
 {
@@ -30,8 +30,8 @@ class AdminController extends \Backpack\Base\app\Http\Controllers\AdminControlle
 
         $data['sale'] = [
       'count' => [
-        'all' => Sale::getSaleCount('m', 'all'),
-        'paid' => Sale::getSaleCount('m', 'paid'),
+        'all'   => Sale::getSaleCount('m', 'all'),
+        'paid'  => Sale::getSaleCount('m', 'paid'),
         'debit' => Sale::getSaleCount('m', 'debit'),
       ],
       'totalIncome' => Sale::getTotalIncome('m'),
