@@ -3,8 +3,8 @@
 namespace app\Http\Controllers\Admin;
 
 use App\Models\Sale;
-use Charts;
 use Auth;
+use Charts;
 
 class AdminController extends \Backpack\Base\app\Http\Controllers\AdminController
 {
