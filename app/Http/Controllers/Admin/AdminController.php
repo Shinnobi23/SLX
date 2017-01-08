@@ -2,9 +2,9 @@
 
 namespace app\Http\Controllers\Admin;
 
+use Charts;
 use App\Models\Sale;
 use Auth;
-use Charts;
 
 class AdminController extends \Backpack\Base\app\Http\Controllers\AdminController
 {
@@ -30,20 +30,20 @@ class AdminController extends \Backpack\Base\app\Http\Controllers\AdminControlle
         $data['title'] = trans('backpack::base.dashboard');
 
         $data['sale'] = [
-            'count' => [
-                'all'   => Sale::getSaleCount('m', 'all'),
-                'paid'  => Sale::getSaleCount('m', 'paid'),
-                'debit' => Sale::getSaleCount('m', 'debit'),
-            ],
-            'totalIncome' => Sale::getTotalIncome('m'),
-        ];
+      'count' => [
+        'all'   => Sale::getSaleCount('m', 'all'),
+        'paid'  => Sale::getSaleCount('m', 'paid'),
+        'debit' => Sale::getSaleCount('m', 'debit'),
+      ],
+      'totalIncome' => Sale::getTotalIncome('m'),
+    ];
 
         $data['chart'] = Charts::database(Sale::all(), 'bar', 'highcharts')
-            ->title('ຍອດຂາຍປະຈໍາເດືອນ')
-            ->elementLabel('ຍອດຂາຍທັງໝົດ')
-            ->dimensions(1000, 500)
-            ->responsive(true)
-            ->groupByDay();
+      ->title('ຍອດຂາຍປະຈໍາເດືອນ')
+      ->elementLabel('ຍອດຂາຍທັງໝົດ')
+      ->dimensions(1000, 500)
+      ->responsive(true)
+      ->groupByDay();
 
         return view('backpack::dashboard', $data);
     }
