@@ -2,9 +2,9 @@
 
 namespace app\Http\Controllers\Admin;
 
+use Auth;
 use Charts;
 use App\Models\Sale;
-use Auth;
 
 class AdminController extends \Backpack\Base\app\Http\Controllers\AdminController
 {
